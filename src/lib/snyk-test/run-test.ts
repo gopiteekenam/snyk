@@ -277,7 +277,9 @@ async function assembleLocalPayloads(
   root,
   options: Options & TestOptions,
 ): Promise<Payload[]> {
-  const analysisType = options.docker ? 'docker' : options.packageManager;
+  // For --all-projects packageManager is yet undefined here. Use 'all'
+  const analysisType =
+    (options.docker ? 'docker' : options.packageManager) || 'all';
   const spinnerLbl =
     'Analyzing ' +
     analysisType +

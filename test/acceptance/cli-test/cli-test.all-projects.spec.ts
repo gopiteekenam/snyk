@@ -15,6 +15,7 @@ export const AllProjectsTests: AcceptanceTests = {
 
       const result = await params.cli.test('mono-repo-project', {
         allProjects: true,
+        detectionLevel: 1,
       });
       t.ok(spyPlugin.withArgs('rubygems').calledOnce, 'calls rubygems plugin');
       t.ok(spyPlugin.withArgs('npm').calledOnce, 'calls npm plugin');
@@ -127,7 +128,10 @@ export const AllProjectsTests: AcceptanceTests = {
       const spyPlugin = sinon.spy(params.plugins, 'loadPlugin');
       t.teardown(spyPlugin.restore);
 
-      const res = await params.cli.test('ruby-app', { allProjects: true });
+      const res = await params.cli.test('ruby-app', {
+        allProjects: true,
+        detectionLevel: 1,
+      });
 
       t.ok(spyPlugin.withArgs('rubygems').calledOnce, 'calls rubygems plugin');
       t.notOk(spyPlugin.withArgs('npm').calledOnce, "doesn't call npm plugin");
@@ -163,6 +167,7 @@ export const AllProjectsTests: AcceptanceTests = {
         await params.cli.test('./', {
           'ignore-policy': true,
           allProjects: true,
+          detectionLevel: 1,
         });
         t.fail('should have thrown');
       } catch (err) {
