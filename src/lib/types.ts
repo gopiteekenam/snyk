@@ -31,6 +31,7 @@ export interface TestOptions {
   showVulnPaths: ShowVulnPaths;
   failOn?: FailOn;
   allProjects?: boolean;
+  detectionLevel?: number;
 }
 export interface ProtectOptions {
   loose: boolean;
